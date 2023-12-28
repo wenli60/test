@@ -16,6 +16,7 @@ func main() {
 	fmt.Println("2222=====================" + token)
 	user, err := jwt.ParseToken(token)
 	if err != nil {
+		fmt.Println("33333========================")
 		fmt.Println(err)
 	}
 	fmt.Println("========================")

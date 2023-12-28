@@ -3,6 +3,7 @@ package jwt
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"time"
 )
 
 type JwtPayLoad struct {
@@ -20,7 +21,7 @@ func GenToken(user JwtPayLoad) (string, error) {
 	claims := CustomClaims{
 		user,
 		jwt.StandardClaims{
-			ExpiresAt: 15000, // 过期时间
+			ExpiresAt: time.Now().Add(1 * time.Hour).Unix(), // 过期时间
 			Issuer:    "wenli",
 		},
 	}
@@ -37,7 +38,6 @@ func ParseToken(tokenStr string) (*CustomClaims, error) {
 		return nil, err
 	}
 	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
-		println("--------------------------")
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")
