@@ -23,8 +23,7 @@ func GenToken(user JwtPayLoad) (string, error) {
 	claims := CustomClaims{
 		user,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(1 * time.Hour).Unix(), // 过期时间
-			Issuer:    "wenli",
+			IssuedAt: time.Now().Unix(), // 过期时间
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
