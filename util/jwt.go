@@ -11,13 +11,15 @@ type JwtPayLoad struct {
 	Appkey string `json:"appkey"`
 }
 
+const secretKey = "dddddd"
+
 type CustomClaims struct {
 	JwtPayLoad
 	jwt.StandardClaims
 }
 
 func GenToken(user JwtPayLoad) (string, error) {
-	var secretKey = []byte("wenli")
+	var secretKey = []byte(secretKey)
 	claims := CustomClaims{
 		user,
 		jwt.StandardClaims{
@@ -30,7 +32,7 @@ func GenToken(user JwtPayLoad) (string, error) {
 }
 
 func ParseToken(tokenStr string) (*CustomClaims, error) {
-	var secretKey = []byte("wenli")
+	var secretKey = []byte(secretKey)
 	token, err := jwt.ParseWithClaims(tokenStr, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})

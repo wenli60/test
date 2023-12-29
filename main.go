@@ -20,7 +20,7 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println("========================")
-	fmt.Println(user)
+	fmt.Println(user.JwtPayLoad.Appid)
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": 1,
